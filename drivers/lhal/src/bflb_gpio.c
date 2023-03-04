@@ -138,8 +138,7 @@ void bflb_gpio_set(struct bflb_device_s *dev, uint8_t pin)
     uint32_t regval = getreg32(dev->reg_base + GLB_GPIO_CFGCTL35_OFFSET);
     putreg32(regval | 1 << (pin & 0x1f), dev->reg_base + GLB_GPIO_CFGCTL35_OFFSET);
 #elif defined(BL616) || defined(BL808) || defined(BL606P) || defined(BL628)
-    uint32_t regval = getreg32(dev->reg_base + GLB_GPIO_CFG138_OFFSET + ((pin >> 5) << 2));
-    putreg32(regval | 1 << (pin & 0x1f), dev->reg_base + GLB_GPIO_CFG138_OFFSET + ((pin >> 5) << 2));
+    putreg32(1 << (pin & 0x1f), dev->reg_base + GLB_GPIO_CFG138_OFFSET + ((pin >> 5) << 2));
 #endif
 }
 
@@ -152,8 +151,7 @@ void bflb_gpio_reset(struct bflb_device_s *dev, uint8_t pin)
     uint32_t regval = getreg32(dev->reg_base + GLB_GPIO_CFGCTL36_OFFSET);
     putreg32(regval & ~(1 << (pin & 0x1f)), dev->reg_base + GLB_GPIO_CFGCTL36_OFFSET);
 #elif defined(BL616) || defined(BL808) || defined(BL606P) || defined(BL628)
-    uint32_t regval = getreg32(dev->reg_base + GLB_GPIO_CFG140_OFFSET + ((pin >> 5) << 2));
-    putreg32(regval & ~(1 << (pin & 0x1f)), dev->reg_base + GLB_GPIO_CFG140_OFFSET + ((pin >> 5) << 2));
+    putreg32(1 << (pin & 0x1f), dev->reg_base + GLB_GPIO_CFG140_OFFSET + ((pin >> 5) << 2));
 #endif
 }
 
